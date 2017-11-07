@@ -1,0 +1,21 @@
+{
+  "name": "ai-projects",
+  "version": "1.0.0",
+  "description": "Some projects",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/marthed/ai-projects.git"
+  },
+  "author": "Martin Hedlund",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/marthed/ai-projects/issues"
+  },
+  "devDependencies": {
+    "webpack": "^3.8.1"
+  }
+}
