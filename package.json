@@ -4,6 +4,8 @@
   "description": "Some projects",
   "main": "index.js",
   "scripts": {
+    "start": "node dist/main.bundle.js",
+    "build": "webpack",
     "test": "test"
   },
   "repository": {
