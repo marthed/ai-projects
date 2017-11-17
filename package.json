@@ -4,7 +4,7 @@
   "description": "Some projects",
   "main": "index.js",
   "scripts": {
-    "start": "node dist/main.bundle.js",
+    "start": "node server/start.js",
     "build": "webpack",
     "test": "test"
   },
@@ -19,5 +19,8 @@
   },
   "devDependencies": {
     "webpack": "^3.8.1"
+  },
+  "dependencies": {
+    "express": "^4.16.2"
   }
 }
