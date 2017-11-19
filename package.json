@@ -4,7 +4,7 @@
   "description": "Some projects",
   "main": "index.js",
   "scripts": {
-    "start": "node server/start.js",
+    "start": "webpack && nodemon server/start.js",
     "build": "webpack",
     "test": "test"
   },
@@ -21,6 +21,8 @@
     "webpack": "^3.8.1"
   },
   "dependencies": {
-    "express": "^4.16.2"
+    "express": "^4.16.2",
+    "nodemon": "^1.12.1",
+    "pug": "^2.0.0-rc.4"
   }
 }
