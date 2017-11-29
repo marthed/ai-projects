@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Overview from './components/overview.jsx';
+import styles from './style.css';
 
 
 class App extends React.Component {

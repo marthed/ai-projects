@@ -9,6 +9,11 @@ loaders.push({
   use: 'babel-loader',
 });
 
+loaders.push({
+  test: /\.css$/,
+  loaders: ['style-loader', 'css-loader']
+});
+
 module.exports = {
   entry: './client/app.jsx',
   output: {
