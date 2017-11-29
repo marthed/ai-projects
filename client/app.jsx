@@ -7,7 +7,7 @@ class App extends React.Component {
     return (
       <div className="app">
         <h1> Hello World! </h1>
-        <p>Hej</p>
+        <p>Hej, funkar det att ladda om?</p>
       </div>
       )
   }

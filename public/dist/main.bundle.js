@@ -981,7 +981,7 @@ var App = function (_React$Component) {
         _react2.default.createElement(
           'p',
           null,
-          'Hej'
+          'Hej, funkar det att ladda om?'
         )
       );
     }
