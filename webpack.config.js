@@ -2,14 +2,12 @@ const webpack = require('webpack');
 var path = require('path');
 
 let loaders = [];
-let plugins = [];
 
 loaders.push({
   test: /\.jsx?$/,
   exclude: /node_modules/,
-  use: 'babel-loader'
+  use: 'babel-loader',
 });
-
 
 module.exports = {
   entry: './client/app.jsx',
@@ -19,6 +17,5 @@ module.exports = {
   },
   module: {
     rules: loaders
-  },
-  plugins
+  }
 };
