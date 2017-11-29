@@ -10,8 +10,6 @@ loaders.push({
   use: 'babel-loader'
 });
 
-plugins.push(new webpack.HotModuleReplacementPlugin());
-
 
 module.exports = {
   entry: './client/app.jsx',
