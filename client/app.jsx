@@ -9,8 +9,6 @@ class App extends React.Component {
     return (
       <div className="app">
         <Overview />
-        <h1> Hello World! </h1>
-        <p>Hej, funkar det att ladda om?</p>
       </div>
       )
   }

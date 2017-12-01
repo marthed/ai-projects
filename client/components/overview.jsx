@@ -1,4 +1,21 @@
 import React from 'react';
+import './overview.css';
+import Table from './table.jsx';
+
+const teams = [
+  {
+    name: 'Team America',
+    points: 16
+  },
+  {
+    name: 'Midgårds Asar',
+    points: 16
+  },
+  {
+    name: 'Smultronen',
+    points: 12
+  }
+]
 
 export default class Overview extends React.Component {
 
@@ -9,7 +26,7 @@ export default class Overview extends React.Component {
   render () {
     return (
       <div className="overview">
-        <button type="button" onClick={this.onClick}></button>
+        <Table teams={teams} />
       </div>
       )
   }
