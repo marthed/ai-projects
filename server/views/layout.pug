@@ -1,10 +1,19 @@
 doctype html
 html
   head
+    meta(charset='utf-8')
     title= 'Former Yugos League'
+    style.
+      .footer {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 20px;
+      }
   body
     block content
 
   footer.footer
-    p Copyright (c) Martin Hedlund
+    block footer-text
+      p Copyright (c) Martin Hedlund
 
