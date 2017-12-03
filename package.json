@@ -4,7 +4,7 @@
   "description": "Some projects",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon server/start.js",
+    "start": "node server/start.js",
     "server": "nodemon server/start.js",
     "client": "webpack --watch",
     "build": "webpack",

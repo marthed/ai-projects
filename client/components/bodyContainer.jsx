@@ -23,7 +23,9 @@ export default class BodyContainer extends React.Component {
   render () {
     return (
       <div className="body-container">
-        <Table teams={teams} />
+        <div className="body-container__inner">
+          <Table teams={teams} />
+        </div>
       </div>
       )
   }

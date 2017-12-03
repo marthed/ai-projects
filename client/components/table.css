@@ -1,0 +1,28 @@
+.table {
+
+}
+
+.table thead {
+  font-style: bold;
+  background: #dcd5d5;
+}
+
+.table tr {
+  
+}
+
+.table th {
+  padding: 5px;
+}
+
+.table tbody {
+  padding-top: 3px;
+  background: #eae5e5;
+}
+
+.table td {
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-right: 10px;
+  padding-left: 10px;
+}

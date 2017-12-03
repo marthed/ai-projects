@@ -1,4 +1,14 @@
 .body-container {
   display: flex;
   justify-content: center;
+  margin-left: 50px;
+  margin-right: 50px;
+}
+
+.body-container__inner {
+  background: #f6f4f4;
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  padding: 20px;
 }
