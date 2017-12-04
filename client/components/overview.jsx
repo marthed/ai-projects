@@ -2,7 +2,7 @@ import React from 'react';
 import './overview.css';
 import Table from './table.jsx';
 import HeaderBar from './headerBar.jsx';
-import BodyContainer from './BodyContainer.jsx';
+import BodyContainer from './bodyContainer.jsx';
 
 export default class Overview extends React.Component {
 
