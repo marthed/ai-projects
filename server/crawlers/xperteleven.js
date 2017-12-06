@@ -20,10 +20,18 @@ async function getStandings() {
       $('tr', '#ctl00_cphMain_dgStandings').each(function( idx ) {
 
         console.log('text', $(this).text());
-        var text = $(this).text().replace(/\s/g,'');
-        if(text !== ''){
-          dataList.push(text);
-        }
+        var rawList = $(this).text().split(' ').filter((string) => {
+          const trimed = string.trim();
+          return trimed !== '';
+        });
+
+        const newObject = Object.assign({}, rawList);
+        dataList.push(newObject);
+
+        // var text = $(this).text().replace(/\s/g,'');
+        // if(text !== ''){
+        //   dataList.push(text);
+        // }
       });
       console.log('dataList', dataList);
       return Promise.resolve(dataList);
