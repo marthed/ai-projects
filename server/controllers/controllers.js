@@ -6,8 +6,6 @@ homePage = (req, res) => {
 
 async function crawler(req, res) {
   const data = await xpertelevenCrawler.getStandings();
-  console.log('data', data);
-
   res.send(data);
 };
 

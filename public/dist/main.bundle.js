@@ -1885,24 +1885,56 @@ var Table = function (_React$Component) {
     }
 
     return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Table.__proto__ || Object.getPrototypeOf(Table)).call.apply(_ref, [this].concat(args))), _this), _this.renderPoints = function (teams) {
-      return teams.map(function (team, idx) {
+      return Object.keys(teams).map(function (team, idx) {
+        console.log('HEj', team);
+        console.log(teams[team].position);
         return _react2.default.createElement(
           'tr',
           { key: idx },
           _react2.default.createElement(
             'td',
             null,
-            idx + 1
+            teams[team].position
           ),
           _react2.default.createElement(
             'td',
             null,
-            team.name
+            teams[team].team
           ),
           _react2.default.createElement(
             'td',
             null,
-            team.points
+            teams[team].games
+          ),
+          _react2.default.createElement(
+            'td',
+            null,
+            teams[team].won
+          ),
+          _react2.default.createElement(
+            'td',
+            null,
+            teams[team].draw
+          ),
+          _react2.default.createElement(
+            'td',
+            null,
+            teams[team].lost
+          ),
+          _react2.default.createElement(
+            'td',
+            null,
+            teams[team].goals
+          ),
+          _react2.default.createElement(
+            'td',
+            null,
+            teams[team].goalDiff
+          ),
+          _react2.default.createElement(
+            'td',
+            null,
+            teams[team].points
           )
         );
       });
@@ -1914,6 +1946,7 @@ var Table = function (_React$Component) {
     value: function render() {
       var teams = this.props.teams;
 
+      console.log('teams', teams);
       return _react2.default.createElement(
         'div',
         { className: 'table' },
@@ -1939,6 +1972,36 @@ var Table = function (_React$Component) {
               _react2.default.createElement(
                 'th',
                 null,
+                'M'
+              ),
+              _react2.default.createElement(
+                'th',
+                null,
+                'V'
+              ),
+              _react2.default.createElement(
+                'th',
+                null,
+                'O'
+              ),
+              _react2.default.createElement(
+                'th',
+                null,
+                'F'
+              ),
+              _react2.default.createElement(
+                'th',
+                null,
+                'MF - MB'
+              ),
+              _react2.default.createElement(
+                'th',
+                null,
+                'Diff'
+              ),
+              _react2.default.createElement(
+                'th',
+                null,
                 'P'
               )
             )
@@ -1946,7 +2009,7 @@ var Table = function (_React$Component) {
           _react2.default.createElement(
             'tbody',
             null,
-            this.renderPoints(teams)
+            teams && this.renderPoints(teams)
           )
         )
       );
@@ -19936,22 +19999,13 @@ __webpack_require__(67);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var teams = [{
-  name: 'Team America',
-  points: 16
-}, {
-  name: 'Midgårds Asar',
-  points: 16
-}, {
-  name: 'Smultronen',
-  points: 12
-}];
 
 var BodyContainer = function (_React$Component) {
   _inherits(BodyContainer, _React$Component);
@@ -19967,11 +20021,18 @@ var BodyContainer = function (_React$Component) {
       args[_key] = arguments[_key];
     }
 
-    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = BodyContainer.__proto__ || Object.getPrototypeOf(BodyContainer)).call.apply(_ref, [this].concat(args))), _this), _this.getData = function (options) {
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = BodyContainer.__proto__ || Object.getPrototypeOf(BodyContainer)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
+      teams: null
+    }, _this.getData = function (options) {
       return function () {
         console.log('get data!');
         return _axios2.default.request(options).then(function (res) {
-          console.log(res.data);
+          var result = {};
+          res.data.forEach(function (team) {
+            var name = team.team;
+            Object.assign(result, _defineProperty({}, name, team));
+          });
+          _this.setState({ teams: result });
           return Promise.resolve(res.data);
         }).catch(function (error) {
           return Promise.reject(error);
@@ -19989,13 +20050,19 @@ var BodyContainer = function (_React$Component) {
         url: '/crawler'
       };
 
+      console.log(this.state);
+
+      var teams = this.state.teams;
+
+      console.log('teams', teams);
+
       return _react2.default.createElement(
         'div',
         { className: 'body-container' },
         _react2.default.createElement(
           'div',
           { className: 'body-container__inner' },
-          _react2.default.createElement(_table2.default, { teams: teams }),
+          _react2.default.createElement(_table2.default, { teams: teams ? teams : null }),
           _react2.default.createElement(_button2.default, { onChange: this.getData(options), text: 'H\xE4mta data' })
         )
       );

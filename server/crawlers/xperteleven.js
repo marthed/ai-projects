@@ -6,8 +6,18 @@ var URL = require('url-parse');
 
 async function getStandings() {
   var pageToVisit = "http://www.xperteleven.com/standings.aspx?Lid=333091&Sel=T&Lnr=1&dh=2";
-  console.log('get standings');
-
+  const standingProperties = [
+    'position',
+    'team',
+    'games',
+    'won',
+    'draw',
+    'lost',
+    'goals',
+    'goalDiff',
+    'points'
+  ];
+  
   return axios.request(
     {
       url: pageToVisit,
@@ -15,26 +25,31 @@ async function getStandings() {
     })
     .then((res) => {
       var $ = cheerio.load(res.data);
-      var dataList = [];
-      console.log($('tr', '#ctl00_cphMain_dgStandings'));
-      $('tr', '#ctl00_cphMain_dgStandings').each(function( idx ) {
-
-        console.log('text', $(this).text());
-        var rawList = $(this).text().split(' ').filter((string) => {
-          const trimed = string.trim();
-          return trimed !== '';
-        });
-
-        const newObject = Object.assign({}, rawList);
-        dataList.push(newObject);
-
+      var standings = [];
+      var rows = [];
+      $('tr', '#ctl00_cphMain_dgStandings').each(function(idx) {
+        const rowList = $(this).text()
+          .split('  ')
+          .filter((string) => {
+            const trimed = string.trim();
+            return trimed !== '';
+          });
+        rows.push(rowList);
         // var text = $(this).text().replace(/\s/g,'');
-        // if(text !== ''){
-        //   dataList.push(text);
-        // }
       });
-      console.log('dataList', dataList);
-      return Promise.resolve(dataList);
+
+      var processedObject = rows.filter((row, idx) => {
+        return idx % 2 !== 0;
+      }).map((row) => {
+        const rowObject = row.reduce((acc, item, idx) => {
+          const property = standingProperties[idx];
+          Object.assign(acc,{ [property]: item });
+          return acc;
+        }, {});
+        return rowObject;
+      });
+
+      return Promise.resolve(processedObject);
     })
     .catch((error) => {
       return Promise.reject(error);

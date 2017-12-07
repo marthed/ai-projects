@@ -4,12 +4,20 @@ import './table.css';
 export default class Table extends React.Component {
 
     renderPoints = (teams) => {
-      return teams.map((team, idx) => {
+      return Object.keys(teams).map((team, idx) => {
+        console.log('HEj', team);
+        console.log(teams[team].position);
         return (
           <tr key={idx}>
-            <td>{idx+1}</td>
-            <td>{team.name}</td>
-            <td>{team.points}</td>
+            <td>{teams[team].position}</td>
+            <td>{teams[team].team}</td>
+            <td>{teams[team].games}</td>
+            <td>{teams[team].won}</td>
+            <td>{teams[team].draw}</td>
+            <td>{teams[team].lost}</td>
+            <td>{teams[team].goals}</td>
+            <td>{teams[team].goalDiff}</td>
+            <td>{teams[team].points}</td>
           </tr>
         );
       });
@@ -17,6 +25,7 @@ export default class Table extends React.Component {
   
     render () {
       const { teams } = this.props;
+      console.log('teams', teams);
       return (
         <div className="table">
           <table>
@@ -24,11 +33,17 @@ export default class Table extends React.Component {
               <tr>
                 <th>Plac.</th>
                 <th>Lag</th>
+                <th>M</th>
+                <th>V</th>
+                <th>O</th>
+                <th>F</th>
+                <th>MF - MB</th>
+                <th>Diff</th>
                 <th>P</th>
               </tr>
             </thead>
             <tbody>
-              {this.renderPoints(teams)}
+              {teams && this.renderPoints(teams)}
             </tbody>
           </table>
         </div>

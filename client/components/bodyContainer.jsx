@@ -5,30 +5,23 @@ import Button from './button.jsx';
 import axios from 'axios';
 import './bodyContainer.css';
 
-const teams = [
-  {
-    name: 'Team America',
-    points: 16
-  },
-  {
-    name: 'Midgårds Asar',
-    points: 16
-  },
-  {
-    name: 'Smultronen',
-    points: 12
-  }
-]
-
-
 
 export default class BodyContainer extends React.Component {
+
+  state = {
+    teams: null
+  }
 
   getData = (options) => () => {
     console.log('get data!');
     return axios.request(options)
       .then((res) => {
-        console.log(res.data);
+        const result = {};
+        res.data.forEach((team) => {
+          const name = team.team;
+          Object.assign(result, { [name]: team });
+        });
+        this.setState({ teams: result });
         return Promise.resolve(res.data);
       })
       .catch((error) => {
@@ -42,11 +35,16 @@ export default class BodyContainer extends React.Component {
       method: 'GET',
       url: '/crawler',
     };
+
+    console.log(this.state);
+
+    const { teams } = this.state;
+    console.log('teams', teams);
     
     return (
       <div className="body-container">
         <div className="body-container__inner">
-          <Table teams={teams} />
+          <Table teams={teams ? teams : null } />
           <Button onChange={this.getData(options)} text="Hämta data"/> 
         </div>
       </div>
