@@ -1,14 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Overview from './components/overview.jsx';
+import TinderContainer from './components/tinder/tinderContainer.jsx';
 import styles from './style.css';
 
+const enableTinder = true;
 
 class App extends React.Component {
   render () {
     return (
       <div className="app">
-        <Overview />
+        {!enableTinder && <Overview />}
+        {enableTinder && <TinderContainer /> }
       </div>
       )
   }

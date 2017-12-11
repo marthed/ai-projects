@@ -2311,6 +2311,10 @@ var _overview = __webpack_require__(37);
 
 var _overview2 = _interopRequireDefault(_overview);
 
+var _tinderContainer = __webpack_require__(71);
+
+var _tinderContainer2 = _interopRequireDefault(_tinderContainer);
+
 var _style = __webpack_require__(69);
 
 var _style2 = _interopRequireDefault(_style);
@@ -2322,6 +2326,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var enableTinder = true;
 
 var App = function (_React$Component) {
   _inherits(App, _React$Component);
@@ -2338,7 +2344,8 @@ var App = function (_React$Component) {
       return _react2.default.createElement(
         'div',
         { className: 'app' },
-        _react2.default.createElement(_overview2.default, null)
+        !enableTinder && _react2.default.createElement(_overview2.default, null),
+        enableTinder && _react2.default.createElement(_tinderContainer2.default, null)
       );
     }
   }]);
@@ -21114,6 +21121,162 @@ exports = module.exports = __webpack_require__(4)(undefined);
 
 // module
 exports.push([module.i, ".app {\n  background-color: #f0f8ff;\n  padding-top: 5px;\n  padding-left: 10px;\n  padding-right: 10px;\n  padding-bottom: 5px;\n}", ""]);
+
+// exports
+
+
+/***/ }),
+/* 71 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(2);
+
+var _react2 = _interopRequireDefault(_react);
+
+__webpack_require__(72);
+
+var _button = __webpack_require__(47);
+
+var _button2 = _interopRequireDefault(_button);
+
+var _axios = __webpack_require__(48);
+
+var _axios2 = _interopRequireDefault(_axios);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var TinderContainer = function (_React$Component) {
+  _inherits(TinderContainer, _React$Component);
+
+  function TinderContainer() {
+    var _ref;
+
+    var _temp, _this, _ret;
+
+    _classCallCheck(this, TinderContainer);
+
+    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = TinderContainer.__proto__ || Object.getPrototypeOf(TinderContainer)).call.apply(_ref, [this].concat(args))), _this), _this.componentWillMount = function () {
+      console.log('TinderContainer will mount');
+      window.fbAsyncInit = function () {
+        console.log('FB init');
+        FB.init({
+          appId: '317256535440951',
+          autoLogAppEvents: true,
+          xfbml: true,
+          version: 'v2.11'
+        });
+      };
+
+      (function (d, s, id) {
+        var js,
+            fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) {
+          return;
+        }
+        js = d.createElement(s);js.id = id;
+        js.src = "https://connect.facebook.net/en_US/sdk.js";
+        fjs.parentNode.insertBefore(js, fjs);
+      })(document, 'script', 'facebook-jssdk');
+    }, _this.tinderLogin = function () {
+      FB.getLoginStatus(function (res) {
+        console.log('FB login response', res.authResponse);
+        return _axios2.default.post('/tinder', _extends({}, res.authResponse)).then(function (res) {
+          console.log(res);
+          return Promise.resolve(res);
+        }).catch(function (error) {
+          console.log(error);
+          return Promise.resolve(error);
+        });
+      });
+    }, _temp), _possibleConstructorReturn(_this, _ret);
+  }
+
+  _createClass(TinderContainer, [{
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(
+        'div',
+        { className: 'tinder-container' },
+        _react2.default.createElement(_button2.default, { text: 'Login to Tinder', onChange: this.tinderLogin }),
+        _react2.default.createElement('div', {
+          className: 'fb-login-button',
+          'data-max-rows': '1',
+          'data-size': 'large',
+          'data-button-type': 'continue_with',
+          'data-show-faces': 'false',
+          'data-auto-logout-link': 'false',
+          'data-use-continue-as': 'false' })
+      );
+    }
+  }]);
+
+  return TinderContainer;
+}(_react2.default.Component);
+
+exports.default = TinderContainer;
+
+/***/ }),
+/* 72 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(73);
+if(typeof content === 'string') content = [[module.i, content, '']];
+// Prepare cssTransformation
+var transform;
+
+var options = {"hmr":true}
+options.transform = transform
+// add the styles to the DOM
+var update = __webpack_require__(5)(content, options);
+if(content.locals) module.exports = content.locals;
+// Hot Module Replacement
+if(false) {
+	// When the styles change, update the <style> tags
+	if(!content.locals) {
+		module.hot.accept("!!../../../node_modules/css-loader/index.js!./tinderContainer.css", function() {
+			var newContent = require("!!../../../node_modules/css-loader/index.js!./tinderContainer.css");
+			if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+			update(newContent);
+		});
+	}
+	// When the module is disposed, remove the <style> tags
+	module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 73 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(4)(undefined);
+// imports
+
+
+// module
+exports.push([module.i, ".tinder-container {\n  display: flex;\n  justify-content: center;\n}", ""]);
 
 // exports
 

@@ -6,4 +6,6 @@ var path = require('path');
 router.get('/', Controller.homePage);
 router.get('/crawler', Controller.crawler);
 
+router.post('/tinder', Controller.tinder);
+
 module.exports = router;
