@@ -6,6 +6,11 @@ import axios from 'axios';
 
 export default class TinderContainer extends React.Component {
 
+  state = {
+    auth: null,
+    data: null
+  }
+
   componentWillMount = () => {
     console.log('TinderContainer will mount');
     window.fbAsyncInit = function() {
@@ -28,33 +33,38 @@ export default class TinderContainer extends React.Component {
   }
 
   tinderLogin = () => {
-    FB.getLoginStatus((res) => {
-      console.log('FB login response', res.authResponse);
-      return axios.post('/tinder', {
-        ...res.authResponse
-      }).then((res) => {
-        console.log(res);
-        return Promise.resolve(res)
-      })
-      .catch((error) => {
-        console.log(error);
-        return Promise.resolve(error)
+    return axios.post('/tinder', {
+    }).then((res) => {
+      console.log('Response', res);
+      this.setState({
+        auth: res.data.accessToken,
+        data: res.data.data
       });
+      return Promise.resolve(res)
+    })
+    .catch((error) => {
+      console.log(error);
+      return Promise.resolve(error)
     });
   };
  
   render () {
     return (
       <div className="tinder-container">
-        <Button text='Login to Tinder' onChange={this.tinderLogin} />
-        <div
-          className="fb-login-button"
-          data-max-rows="1"
-          data-size="large"
-          data-button-type="continue_with"
-          data-show-faces="false"
-          data-auto-logout-link="false"
-          data-use-continue-as="false">
+        <div className="tinder-container__inner">
+          <div className="tinder-container__headline">
+            <h1>Hello and Welcome.</h1>
+          </div>
+          <Button text='Login to Tinder' onChange={this.tinderLogin} />
+          <div
+            className="fb-login-button"
+            data-max-rows="1"
+            data-size="large"
+            data-button-type="continue_with"
+            data-show-faces="false"
+            data-auto-logout-link="false"
+            data-use-continue-as="false">
+          </div>
         </div>
       </div>
       )

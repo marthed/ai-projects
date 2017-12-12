@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 25);
+/******/ 	return __webpack_require__(__webpack_require__.s = 27);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -70,7 +70,7 @@
 "use strict";
 
 
-var bind = __webpack_require__(20);
+var bind = __webpack_require__(22);
 var isBuffer = __webpack_require__(50);
 
 /*global toString:true*/
@@ -571,9 +571,9 @@ process.umask = function() { return 0; };
 /* WEBPACK VAR INJECTION */(function(process) {
 
 if (process.env.NODE_ENV === 'production') {
-  module.exports = __webpack_require__(26);
+  module.exports = __webpack_require__(28);
 } else {
-  module.exports = __webpack_require__(27);
+  module.exports = __webpack_require__(29);
 }
 
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
@@ -759,7 +759,7 @@ var singleton = null;
 var	singletonCounter = 0;
 var	stylesInsertedAtTop = [];
 
-var	fixUrls = __webpack_require__(40);
+var	fixUrls = __webpack_require__(42);
 
 module.exports = function(list, options) {
 	if (typeof DEBUG !== "undefined" && DEBUG) {
@@ -1363,9 +1363,9 @@ if (process.env.NODE_ENV === 'production') {
   // DCE check should happen before ReactDOM bundle executes so that
   // DevTools can report bad minification during injection.
   checkDCE();
-  module.exports = __webpack_require__(29);
+  module.exports = __webpack_require__(31);
 } else {
-  module.exports = __webpack_require__(32);
+  module.exports = __webpack_require__(34);
 }
 
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
@@ -1394,10 +1394,10 @@ function getDefaultAdapter() {
   var adapter;
   if (typeof XMLHttpRequest !== 'undefined') {
     // For browsers use XHR adapter
-    adapter = __webpack_require__(21);
+    adapter = __webpack_require__(23);
   } else if (typeof process !== 'undefined') {
     // For node use HTTP adapter
-    adapter = __webpack_require__(21);
+    adapter = __webpack_require__(23);
   }
   return adapter;
 }
@@ -1487,7 +1487,7 @@ module.exports = defaults;
 if (process.env.NODE_ENV !== 'production') {
   var invariant = __webpack_require__(8);
   var warning = __webpack_require__(9);
-  var ReactPropTypesSecret = __webpack_require__(28);
+  var ReactPropTypesSecret = __webpack_require__(30);
   var loggedTypeFailures = {};
 }
 
@@ -1786,7 +1786,7 @@ module.exports = shallowEqual;
  * 
  */
 
-var isTextNode = __webpack_require__(30);
+var isTextNode = __webpack_require__(32);
 
 /*eslint-disable no-bitwise */
 
@@ -1860,7 +1860,7 @@ var _react = __webpack_require__(2);
 
 var _react2 = _interopRequireDefault(_react);
 
-__webpack_require__(41);
+__webpack_require__(43);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -2028,6 +2028,78 @@ exports.default = Table;
 "use strict";
 
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(2);
+
+var _react2 = _interopRequireDefault(_react);
+
+__webpack_require__(74);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Button = function (_React$Component) {
+  _inherits(Button, _React$Component);
+
+  function Button() {
+    _classCallCheck(this, Button);
+
+    return _possibleConstructorReturn(this, (Button.__proto__ || Object.getPrototypeOf(Button)).apply(this, arguments));
+  }
+
+  _createClass(Button, [{
+    key: 'render',
+    value: function render() {
+      var _props = this.props,
+          onChange = _props.onChange,
+          text = _props.text;
+
+      return _react2.default.createElement(
+        'div',
+        null,
+        _react2.default.createElement(
+          'button',
+          { className: 'button', onClick: onChange },
+          text
+        )
+      );
+    }
+  }]);
+
+  return Button;
+}(_react2.default.Component);
+
+exports.default = Button;
+
+
+Button.defaultProps = {
+  text: '',
+  onChange: function onChange() {}
+};
+
+/***/ }),
+/* 21 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(49);
+
+/***/ }),
+/* 22 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
 module.exports = function bind(fn, thisArg) {
   return function wrap() {
     var args = new Array(arguments.length);
@@ -2040,7 +2112,7 @@ module.exports = function bind(fn, thisArg) {
 
 
 /***/ }),
-/* 21 */
+/* 23 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2051,7 +2123,7 @@ var settle = __webpack_require__(53);
 var buildURL = __webpack_require__(55);
 var parseHeaders = __webpack_require__(56);
 var isURLSameOrigin = __webpack_require__(57);
-var createError = __webpack_require__(22);
+var createError = __webpack_require__(24);
 var btoa = (typeof window !== 'undefined' && window.btoa && window.btoa.bind(window)) || __webpack_require__(58);
 
 module.exports = function xhrAdapter(config) {
@@ -2228,7 +2300,7 @@ module.exports = function xhrAdapter(config) {
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
-/* 22 */
+/* 24 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2253,7 +2325,7 @@ module.exports = function createError(message, config, code, request, response) 
 
 
 /***/ }),
-/* 23 */
+/* 25 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2265,7 +2337,7 @@ module.exports = function isCancel(value) {
 
 
 /***/ }),
-/* 24 */
+/* 26 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2291,7 +2363,7 @@ module.exports = Cancel;
 
 
 /***/ }),
-/* 25 */
+/* 27 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2307,15 +2379,15 @@ var _reactDom = __webpack_require__(10);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
-var _overview = __webpack_require__(37);
+var _overview = __webpack_require__(39);
 
 var _overview2 = _interopRequireDefault(_overview);
 
-var _tinderContainer = __webpack_require__(71);
+var _tinderContainer = __webpack_require__(69);
 
 var _tinderContainer2 = _interopRequireDefault(_tinderContainer);
 
-var _style = __webpack_require__(69);
+var _style = __webpack_require__(72);
 
 var _style2 = _interopRequireDefault(_style);
 
@@ -2358,7 +2430,7 @@ _reactDom2.default.render(_react2.default.createElement(App, null), document.bod
 console.log('It works!');
 
 /***/ }),
-/* 26 */
+/* 28 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2387,7 +2459,7 @@ version:"16.1.1",__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED:{ReactCurren
 
 
 /***/ }),
-/* 27 */
+/* 29 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3738,7 +3810,7 @@ module.exports = react;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
-/* 28 */
+/* 30 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3757,7 +3829,7 @@ module.exports = ReactPropTypesSecret;
 
 
 /***/ }),
-/* 29 */
+/* 31 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3991,7 +4063,7 @@ Z.injectIntoDevTools({findFiberByHostInstance:qb,bundleType:0,version:"16.1.1",r
 
 
 /***/ }),
-/* 30 */
+/* 32 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4006,7 +4078,7 @@ Z.injectIntoDevTools({findFiberByHostInstance:qb,bundleType:0,version:"16.1.1",r
  * @typechecks
  */
 
-var isNode = __webpack_require__(31);
+var isNode = __webpack_require__(33);
 
 /**
  * @param {*} object The object to check.
@@ -4019,7 +4091,7 @@ function isTextNode(object) {
 module.exports = isTextNode;
 
 /***/ }),
-/* 31 */
+/* 33 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4047,7 +4119,7 @@ function isNode(object) {
 module.exports = isNode;
 
 /***/ }),
-/* 32 */
+/* 34 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4079,8 +4151,8 @@ var containsNode = __webpack_require__(17);
 var focusNode = __webpack_require__(18);
 var emptyObject = __webpack_require__(7);
 var checkPropTypes = __webpack_require__(12);
-var hyphenateStyleName = __webpack_require__(33);
-var camelizeStyleName = __webpack_require__(35);
+var hyphenateStyleName = __webpack_require__(35);
+var camelizeStyleName = __webpack_require__(37);
 
 /**
  * WARNING: DO NOT manually require this module.
@@ -19455,7 +19527,7 @@ module.exports = reactDom;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
-/* 33 */
+/* 35 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -19470,7 +19542,7 @@ module.exports = reactDom;
 
 
 
-var hyphenate = __webpack_require__(34);
+var hyphenate = __webpack_require__(36);
 
 var msPattern = /^ms-/;
 
@@ -19497,7 +19569,7 @@ function hyphenateStyleName(string) {
 module.exports = hyphenateStyleName;
 
 /***/ }),
-/* 34 */
+/* 36 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -19533,7 +19605,7 @@ function hyphenate(string) {
 module.exports = hyphenate;
 
 /***/ }),
-/* 35 */
+/* 37 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -19548,7 +19620,7 @@ module.exports = hyphenate;
 
 
 
-var camelize = __webpack_require__(36);
+var camelize = __webpack_require__(38);
 
 var msPattern = /^-ms-/;
 
@@ -19576,7 +19648,7 @@ function camelizeStyleName(string) {
 module.exports = camelizeStyleName;
 
 /***/ }),
-/* 36 */
+/* 38 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -19611,7 +19683,7 @@ function camelize(string) {
 module.exports = camelize;
 
 /***/ }),
-/* 37 */
+/* 39 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -19627,17 +19699,17 @@ var _react = __webpack_require__(2);
 
 var _react2 = _interopRequireDefault(_react);
 
-__webpack_require__(38);
+__webpack_require__(40);
 
 var _table = __webpack_require__(19);
 
 var _table2 = _interopRequireDefault(_table);
 
-var _headerBar = __webpack_require__(43);
+var _headerBar = __webpack_require__(45);
 
 var _headerBar2 = _interopRequireDefault(_headerBar);
 
-var _bodyContainer = __webpack_require__(46);
+var _bodyContainer = __webpack_require__(48);
 
 var _bodyContainer2 = _interopRequireDefault(_bodyContainer);
 
@@ -19676,13 +19748,13 @@ var Overview = function (_React$Component) {
 exports.default = Overview;
 
 /***/ }),
-/* 38 */
+/* 40 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(39);
+var content = __webpack_require__(41);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // Prepare cssTransformation
 var transform;
@@ -19707,7 +19779,7 @@ if(false) {
 }
 
 /***/ }),
-/* 39 */
+/* 41 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(4)(undefined);
@@ -19721,7 +19793,7 @@ exports.push([module.i, "", ""]);
 
 
 /***/ }),
-/* 40 */
+/* 42 */
 /***/ (function(module, exports) {
 
 
@@ -19816,13 +19888,13 @@ module.exports = function (css) {
 
 
 /***/ }),
-/* 41 */
+/* 43 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(42);
+var content = __webpack_require__(44);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // Prepare cssTransformation
 var transform;
@@ -19847,7 +19919,7 @@ if(false) {
 }
 
 /***/ }),
-/* 42 */
+/* 44 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(4)(undefined);
@@ -19861,7 +19933,7 @@ exports.push([module.i, ".table {\n\n}\n\n.table thead {\n  font-style: bold;\n 
 
 
 /***/ }),
-/* 43 */
+/* 45 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -19881,7 +19953,7 @@ var _reactDom = __webpack_require__(10);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
-__webpack_require__(44);
+__webpack_require__(46);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -19925,13 +19997,13 @@ var HeaderBar = function (_React$Component) {
 exports.default = HeaderBar;
 
 /***/ }),
-/* 44 */
+/* 46 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(45);
+var content = __webpack_require__(47);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // Prepare cssTransformation
 var transform;
@@ -19956,7 +20028,7 @@ if(false) {
 }
 
 /***/ }),
-/* 45 */
+/* 47 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(4)(undefined);
@@ -19970,7 +20042,7 @@ exports.push([module.i, ".header-bar {\n  display: flex;\n  justify-content: cen
 
 
 /***/ }),
-/* 46 */
+/* 48 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -19994,11 +20066,11 @@ var _table = __webpack_require__(19);
 
 var _table2 = _interopRequireDefault(_table);
 
-var _button = __webpack_require__(47);
+var _button = __webpack_require__(20);
 
 var _button2 = _interopRequireDefault(_button);
 
-var _axios = __webpack_require__(48);
+var _axios = __webpack_require__(21);
 
 var _axios2 = _interopRequireDefault(_axios);
 
@@ -20082,76 +20154,6 @@ var BodyContainer = function (_React$Component) {
 exports.default = BodyContainer;
 
 /***/ }),
-/* 47 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _react = __webpack_require__(2);
-
-var _react2 = _interopRequireDefault(_react);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var Button = function (_React$Component) {
-  _inherits(Button, _React$Component);
-
-  function Button() {
-    _classCallCheck(this, Button);
-
-    return _possibleConstructorReturn(this, (Button.__proto__ || Object.getPrototypeOf(Button)).apply(this, arguments));
-  }
-
-  _createClass(Button, [{
-    key: 'render',
-    value: function render() {
-      var _props = this.props,
-          onChange = _props.onChange,
-          text = _props.text;
-
-      return _react2.default.createElement(
-        'div',
-        { className: 'button' },
-        _react2.default.createElement(
-          'button',
-          { onClick: onChange },
-          text
-        )
-      );
-    }
-  }]);
-
-  return Button;
-}(_react2.default.Component);
-
-exports.default = Button;
-
-
-Button.defaultProps = {
-  text: '',
-  onChange: function onChange() {}
-};
-
-/***/ }),
-/* 48 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__(49);
-
-/***/ }),
 /* 49 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -20159,7 +20161,7 @@ module.exports = __webpack_require__(49);
 
 
 var utils = __webpack_require__(0);
-var bind = __webpack_require__(20);
+var bind = __webpack_require__(22);
 var Axios = __webpack_require__(51);
 var defaults = __webpack_require__(11);
 
@@ -20194,9 +20196,9 @@ axios.create = function create(instanceConfig) {
 };
 
 // Expose Cancel & CancelToken
-axios.Cancel = __webpack_require__(24);
+axios.Cancel = __webpack_require__(26);
 axios.CancelToken = __webpack_require__(65);
-axios.isCancel = __webpack_require__(23);
+axios.isCancel = __webpack_require__(25);
 
 // Expose all/spread
 axios.all = function all(promises) {
@@ -20349,7 +20351,7 @@ module.exports = function normalizeHeaderName(headers, normalizedName) {
 "use strict";
 
 
-var createError = __webpack_require__(22);
+var createError = __webpack_require__(24);
 
 /**
  * Resolve or reject a Promise based on response status.
@@ -20784,7 +20786,7 @@ module.exports = InterceptorManager;
 
 var utils = __webpack_require__(0);
 var transformData = __webpack_require__(62);
-var isCancel = __webpack_require__(23);
+var isCancel = __webpack_require__(25);
 var defaults = __webpack_require__(11);
 var isAbsoluteURL = __webpack_require__(63);
 var combineURLs = __webpack_require__(64);
@@ -20944,7 +20946,7 @@ module.exports = function combineURLs(baseURL, relativeURL) {
 "use strict";
 
 
-var Cancel = __webpack_require__(24);
+var Cancel = __webpack_require__(26);
 
 /**
  * A `CancelToken` is an object that can be used to request cancellation of an operation.
@@ -21084,51 +21086,6 @@ exports.push([module.i, ".body-container {\n  display: flex;\n  justify-content:
 /* 69 */
 /***/ (function(module, exports, __webpack_require__) {
 
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(70);
-if(typeof content === 'string') content = [[module.i, content, '']];
-// Prepare cssTransformation
-var transform;
-
-var options = {"hmr":true}
-options.transform = transform
-// add the styles to the DOM
-var update = __webpack_require__(5)(content, options);
-if(content.locals) module.exports = content.locals;
-// Hot Module Replacement
-if(false) {
-	// When the styles change, update the <style> tags
-	if(!content.locals) {
-		module.hot.accept("!!../node_modules/css-loader/index.js!./style.css", function() {
-			var newContent = require("!!../node_modules/css-loader/index.js!./style.css");
-			if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-			update(newContent);
-		});
-	}
-	// When the module is disposed, remove the <style> tags
-	module.hot.dispose(function() { update(); });
-}
-
-/***/ }),
-/* 70 */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(4)(undefined);
-// imports
-
-
-// module
-exports.push([module.i, ".app {\n  background-color: #f0f8ff;\n  padding-top: 5px;\n  padding-left: 10px;\n  padding-right: 10px;\n  padding-bottom: 5px;\n}", ""]);
-
-// exports
-
-
-/***/ }),
-/* 71 */
-/***/ (function(module, exports, __webpack_require__) {
-
 "use strict";
 
 
@@ -21136,21 +21093,19 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _react = __webpack_require__(2);
 
 var _react2 = _interopRequireDefault(_react);
 
-__webpack_require__(72);
+__webpack_require__(70);
 
-var _button = __webpack_require__(47);
+var _button = __webpack_require__(20);
 
 var _button2 = _interopRequireDefault(_button);
 
-var _axios = __webpack_require__(48);
+var _axios = __webpack_require__(21);
 
 var _axios2 = _interopRequireDefault(_axios);
 
@@ -21176,7 +21131,10 @@ var TinderContainer = function (_React$Component) {
       args[_key] = arguments[_key];
     }
 
-    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = TinderContainer.__proto__ || Object.getPrototypeOf(TinderContainer)).call.apply(_ref, [this].concat(args))), _this), _this.componentWillMount = function () {
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = TinderContainer.__proto__ || Object.getPrototypeOf(TinderContainer)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
+      auth: null,
+      data: null
+    }, _this.componentWillMount = function () {
       console.log('TinderContainer will mount');
       window.fbAsyncInit = function () {
         console.log('FB init');
@@ -21199,15 +21157,16 @@ var TinderContainer = function (_React$Component) {
         fjs.parentNode.insertBefore(js, fjs);
       })(document, 'script', 'facebook-jssdk');
     }, _this.tinderLogin = function () {
-      FB.getLoginStatus(function (res) {
-        console.log('FB login response', res.authResponse);
-        return _axios2.default.post('/tinder', _extends({}, res.authResponse)).then(function (res) {
-          console.log(res);
-          return Promise.resolve(res);
-        }).catch(function (error) {
-          console.log(error);
-          return Promise.resolve(error);
+      return _axios2.default.post('/tinder', {}).then(function (res) {
+        console.log('Response', res);
+        _this.setState({
+          auth: res.data.accessToken,
+          data: res.data.data
         });
+        return Promise.resolve(res);
+      }).catch(function (error) {
+        console.log(error);
+        return Promise.resolve(error);
       });
     }, _temp), _possibleConstructorReturn(_this, _ret);
   }
@@ -21218,15 +21177,28 @@ var TinderContainer = function (_React$Component) {
       return _react2.default.createElement(
         'div',
         { className: 'tinder-container' },
-        _react2.default.createElement(_button2.default, { text: 'Login to Tinder', onChange: this.tinderLogin }),
-        _react2.default.createElement('div', {
-          className: 'fb-login-button',
-          'data-max-rows': '1',
-          'data-size': 'large',
-          'data-button-type': 'continue_with',
-          'data-show-faces': 'false',
-          'data-auto-logout-link': 'false',
-          'data-use-continue-as': 'false' })
+        _react2.default.createElement(
+          'div',
+          { className: 'tinder-container__inner' },
+          _react2.default.createElement(
+            'div',
+            { className: 'tinder-container__headline' },
+            _react2.default.createElement(
+              'h1',
+              null,
+              'Hello and Welcome.'
+            )
+          ),
+          _react2.default.createElement(_button2.default, { text: 'Login to Tinder', onChange: this.tinderLogin }),
+          _react2.default.createElement('div', {
+            className: 'fb-login-button',
+            'data-max-rows': '1',
+            'data-size': 'large',
+            'data-button-type': 'continue_with',
+            'data-show-faces': 'false',
+            'data-auto-logout-link': 'false',
+            'data-use-continue-as': 'false' })
+        )
       );
     }
   }]);
@@ -21237,13 +21209,13 @@ var TinderContainer = function (_React$Component) {
 exports.default = TinderContainer;
 
 /***/ }),
-/* 72 */
+/* 70 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(73);
+var content = __webpack_require__(71);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // Prepare cssTransformation
 var transform;
@@ -21268,6 +21240,51 @@ if(false) {
 }
 
 /***/ }),
+/* 71 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(4)(undefined);
+// imports
+
+
+// module
+exports.push([module.i, ".tinder-container {\n  display: flex;\n  justify-content: center;\n  margin-left: 50px;\n  margin-right: 50px;\n  min-height: 400px;\n}\n\n.tinder-container__inner {\n  display: flex;\n  padding: 20px;\n  background: #e74040;\n  flex-grow: 1;  \n  flex-direction: column;\n  align-items: center;\n}\n\n.tinder-container__headline {\n  color: #f5f2f2;\n  padding: 10px;\n}\n\n.fb-login-button {\n  padding: 10px;\n}\n\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 72 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(73);
+if(typeof content === 'string') content = [[module.i, content, '']];
+// Prepare cssTransformation
+var transform;
+
+var options = {"hmr":true}
+options.transform = transform
+// add the styles to the DOM
+var update = __webpack_require__(5)(content, options);
+if(content.locals) module.exports = content.locals;
+// Hot Module Replacement
+if(false) {
+	// When the styles change, update the <style> tags
+	if(!content.locals) {
+		module.hot.accept("!!../node_modules/css-loader/index.js!./style.css", function() {
+			var newContent = require("!!../node_modules/css-loader/index.js!./style.css");
+			if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+			update(newContent);
+		});
+	}
+	// When the module is disposed, remove the <style> tags
+	module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
 /* 73 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -21276,7 +21293,52 @@ exports = module.exports = __webpack_require__(4)(undefined);
 
 
 // module
-exports.push([module.i, ".tinder-container {\n  display: flex;\n  justify-content: center;\n}", ""]);
+exports.push([module.i, ".app {\n  background-color: #f0f8ff;\n  padding-top: 5px;\n  padding-left: 10px;\n  padding-right: 10px;\n  padding-bottom: 5px;\n}", ""]);
+
+// exports
+
+
+/***/ }),
+/* 74 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(75);
+if(typeof content === 'string') content = [[module.i, content, '']];
+// Prepare cssTransformation
+var transform;
+
+var options = {"hmr":true}
+options.transform = transform
+// add the styles to the DOM
+var update = __webpack_require__(5)(content, options);
+if(content.locals) module.exports = content.locals;
+// Hot Module Replacement
+if(false) {
+	// When the styles change, update the <style> tags
+	if(!content.locals) {
+		module.hot.accept("!!../../node_modules/css-loader/index.js!./button.css", function() {
+			var newContent = require("!!../../node_modules/css-loader/index.js!./button.css");
+			if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+			update(newContent);
+		});
+	}
+	// When the module is disposed, remove the <style> tags
+	module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 75 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(4)(undefined);
+// imports
+
+
+// module
+exports.push([module.i, ".button {\n  background-color: rgb(243, 236, 234);\n  color: rgb(31, 29, 29);\n  border: none;\n  padding: 12px 30px;\n  text-align: center;\n  display: inline-block;\n  font-size: 16px;\n}\n\n.button:hover {\n  background-color: rgb(224, 221, 220);\n}", ""]);
 
 // exports
 

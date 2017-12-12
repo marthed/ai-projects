@@ -2,7 +2,7 @@ var axios = require('axios');
 var host = 'https://api.gotinder.com';
 
 var userID = '712536446';
-var accessToken = 'EAAGm0PX4ZCpsBAL9w7KkNZCLC0r1H2ne96ttTUrC8LCtPgFZAKjNvxNG0qoaClBYNDEC2HBdUENx24aGrZC675QOKHggMr2iVnLFpRl0HOFQWqNHLjzJFZBEXDHlTRnon8AMgnc1LwtuECdwcmNfgl6zny7yZBGsn2PvU30Q8ZAzuXBvzXIwz3U9hvfJsB59dZBMZCUeeEX5tZCFUKSifJw14ZBxXue42ZA7kBUgevwvlX4IlLKDKHA7oNtmvRvl5EtlEC0ZD';
+var accessToken = 'EAAGm0PX4ZCpsBAIAtJbvO1ZAyLDuEVIoF10ZAiwRNeplEV0WND6KBZBmChn2vrrgA9EKhLbgfGgyRsOh4DGnzBP1Ygz6RgcqcnXDZAEGbVkTyJffeEj0utQ0etGTbyxddwQ2nx583C5tK6exvMa6NawqLvKL34ALxDBEmQ09ZAZCZACNAZBgvzxUZAyQ8t3AcAPefjayDL0i7Xtx3ULwHQjm2SCJ334nCFipgPuWTyuz2AEs20KdhCKsmbcGzxR17NQjAZD';
 
 async function authorization (auth) {
   //const accessToken = auth.accessToken;
@@ -18,8 +18,9 @@ async function authorization (auth) {
     },
     data: JSON.stringify({facebook_token: accessToken, facebook_id: userID})
   }).then((res) => {
-    console.log('RESPONSE', res);
-    return Promise.resolve(res);
+    const data = Object.assign({}, { accessToken }, { data: res.data });
+    console.log('RESPONSE', data);
+    return Promise.resolve(data);
   })
   .catch((error) => {
     console.log(error);
@@ -31,5 +32,3 @@ async function authorization (auth) {
 module.exports = {
   authorization
 }
-
-"&expires_in=3941"
