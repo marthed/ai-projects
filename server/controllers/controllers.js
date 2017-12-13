@@ -15,8 +15,15 @@ async function tinder(req, res) {
   res.send(auth);
 }
 
+async function tinderMatches(req, res) {
+  console.log('BLAAAA: ', req.body);
+  const matches = await tinderbot.getMatches(req.body.token);
+  res.send(matches);
+}
+
 module.exports = {
   homePage,
   crawler,
-  tinder
+  tinder,
+  tinderMatches
 }

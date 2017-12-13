@@ -1,6 +1,7 @@
 import React from 'react';
 import './tinderContainer.css';
 import Button from '../button.jsx';
+import MatchThumbnail from './matchThumbnail.jsx';
 import axios from 'axios';
 
 
@@ -8,7 +9,9 @@ export default class TinderContainer extends React.Component {
 
   state = {
     auth: null,
-    data: null
+    data: null,
+    matches: [],
+    token: ''
   }
 
   componentWillMount = () => {
@@ -38,7 +41,8 @@ export default class TinderContainer extends React.Component {
       console.log('Response', res);
       this.setState({
         auth: res.data.accessToken,
-        data: res.data.data
+        data: res.data.data,
+        token: res.data.data.token
       });
       return Promise.resolve(res)
     })
@@ -47,15 +51,50 @@ export default class TinderContainer extends React.Component {
       return Promise.resolve(error)
     });
   };
+
+  getMatches = () => {
+    const { token } = this.state;
+    if (token !== '') {
+      return axios.post('/tinder/matches', {
+        token
+      })
+      .then((res) => {
+        console.log('Response', res.data.data.results);
+        this.setState({
+          matches: res.data.data.results
+        });
+        return Promise.resolve(res)
+      })
+      .catch((error) => {
+        console.log(error);
+        return Promise.resolve(error)
+      });
+    }
+  };
+
+  renderMatches = (matches) => {
+    console.log('Render matches!');
+    return matches.map((match, idx) => {
+      return <MatchThumbnail match={match} key={idx} />
+    });
+  };
  
   render () {
+    console.log('Token is: ', this.state.token);
+    const { matches } = this.state;
+    console.log('Rendering', matches);
     return (
       <div className="tinder-container">
         <div className="tinder-container__inner">
           <div className="tinder-container__headline">
             <h1>Hello and Welcome.</h1>
           </div>
-          <Button text='Login to Tinder' onChange={this.tinderLogin} />
+          <div className="tinder-container__button">
+            <Button text='Login to Tinder' onChange={this.tinderLogin} />
+          </div>
+          <div className="tinder-container__button">
+            <Button text='Get Matches' onChange={this.getMatches} />
+          </div>
           <div
             className="fb-login-button"
             data-max-rows="1"
@@ -65,6 +104,11 @@ export default class TinderContainer extends React.Component {
             data-auto-logout-link="false"
             data-use-continue-as="false">
           </div>
+          {matches &&
+          <div className='tinder-container__matches'>
+           {this.renderMatches(matches)}
+          </div>
+         }
         </div>
       </div>
       )

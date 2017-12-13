@@ -7,6 +7,7 @@ router.get('/', Controller.homePage);
 router.get('/crawler', Controller.crawler);
 
 router.post('/tinder', Controller.tinder);
+router.post('/tinder/matches', Controller.tinderMatches);
 
 
 module.exports = router;
