@@ -47,7 +47,7 @@ export default class TinderContainer extends React.Component {
       return Promise.resolve(res)
     })
     .catch((error) => {
-      console.log(error);
+      console.log('Error: ', error.message);
       return Promise.resolve(error)
     });
   };
@@ -59,17 +59,34 @@ export default class TinderContainer extends React.Component {
         token
       })
       .then((res) => {
-        console.log('Response', res.data.data.results);
         this.setState({
           matches: res.data.data.results
         });
         return Promise.resolve(res)
       })
       .catch((error) => {
-        console.log(error);
+        console.log('Error: ', error.message);
         return Promise.resolve(error)
       });
-    }
+    };
+  };
+
+  getUpdates = () => {
+    const { token } = this.state;
+    if (token !== '') {
+      return axios.get('/tinder/updates')
+      .then((res) => {
+        console.log(res);
+        this.setState({
+          updates: res.updates
+        });
+        return Promise.resolve(res)
+      })
+      .catch((error) => {
+        console.log('Error: ', error.message);
+        return Promise.resolve(error)
+      });
+    };
   };
 
   renderMatches = (matches) => {
@@ -94,6 +111,9 @@ export default class TinderContainer extends React.Component {
           </div>
           <div className="tinder-container__button">
             <Button text='Get Matches' onChange={this.getMatches} />
+          </div>
+          <div className="tinder-container__button">
+            <Button text='Get Updates' onChange={this.getUpdates} />
           </div>
           <div
             className="fb-login-button"

@@ -19,5 +19,3 @@ class App extends React.Component {
 
 ReactDOM.render(<App/>, document.body.querySelector('.content'));
 
-console.log('It works!');
-

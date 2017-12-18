@@ -2387,7 +2387,7 @@ var _tinderContainer = __webpack_require__(71);
 
 var _tinderContainer2 = _interopRequireDefault(_tinderContainer);
 
-var _style = __webpack_require__(74);
+var _style = __webpack_require__(75);
 
 var _style2 = _interopRequireDefault(_style);
 
@@ -2426,8 +2426,6 @@ var App = function (_React$Component) {
 }(_react2.default.Component);
 
 _reactDom2.default.render(_react2.default.createElement(App, null), document.body.querySelector('.content'));
-
-console.log('It works!');
 
 /***/ }),
 /* 28 */
@@ -21150,7 +21148,7 @@ var _button = __webpack_require__(20);
 
 var _button2 = _interopRequireDefault(_button);
 
-var _matchThumbnail = __webpack_require__(76);
+var _matchThumbnail = __webpack_require__(74);
 
 var _matchThumbnail2 = _interopRequireDefault(_matchThumbnail);
 
@@ -21217,7 +21215,7 @@ var TinderContainer = function (_React$Component) {
         });
         return Promise.resolve(res);
       }).catch(function (error) {
-        console.log(error);
+        console.log('Error: ', error.message);
         return Promise.resolve(error);
       });
     }, _this.getMatches = function () {
@@ -21227,16 +21225,30 @@ var TinderContainer = function (_React$Component) {
         return _axios2.default.post('/tinder/matches', {
           token: token
         }).then(function (res) {
-          console.log('Response', res.data.data.results);
           _this.setState({
             matches: res.data.data.results
           });
           return Promise.resolve(res);
         }).catch(function (error) {
-          console.log(error);
+          console.log('Error: ', error.message);
           return Promise.resolve(error);
         });
-      }
+      };
+    }, _this.getUpdates = function () {
+      var token = _this.state.token;
+
+      if (token !== '') {
+        return _axios2.default.get('/tinder/updates').then(function (res) {
+          console.log(res);
+          _this.setState({
+            updates: res.updates
+          });
+          return Promise.resolve(res);
+        }).catch(function (error) {
+          console.log('Error: ', error.message);
+          return Promise.resolve(error);
+        });
+      };
     }, _this.renderMatches = function (matches) {
       console.log('Render matches!');
       return matches.map(function (match, idx) {
@@ -21276,6 +21288,11 @@ var TinderContainer = function (_React$Component) {
             'div',
             { className: 'tinder-container__button' },
             _react2.default.createElement(_button2.default, { text: 'Get Matches', onChange: this.getMatches })
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'tinder-container__button' },
+            _react2.default.createElement(_button2.default, { text: 'Get Updates', onChange: this.getUpdates })
           ),
           _react2.default.createElement('div', {
             className: 'fb-login-button',
@@ -21349,51 +21366,6 @@ exports.push([module.i, ".tinder-container {\n  display: flex;\n  justify-conten
 /* 74 */
 /***/ (function(module, exports, __webpack_require__) {
 
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(75);
-if(typeof content === 'string') content = [[module.i, content, '']];
-// Prepare cssTransformation
-var transform;
-
-var options = {"hmr":true}
-options.transform = transform
-// add the styles to the DOM
-var update = __webpack_require__(4)(content, options);
-if(content.locals) module.exports = content.locals;
-// Hot Module Replacement
-if(false) {
-	// When the styles change, update the <style> tags
-	if(!content.locals) {
-		module.hot.accept("!!../node_modules/css-loader/index.js!./style.css", function() {
-			var newContent = require("!!../node_modules/css-loader/index.js!./style.css");
-			if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-			update(newContent);
-		});
-	}
-	// When the module is disposed, remove the <style> tags
-	module.hot.dispose(function() { update(); });
-}
-
-/***/ }),
-/* 75 */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(3)(undefined);
-// imports
-
-
-// module
-exports.push([module.i, ".app {\n  background-color: #f0f8ff;\n  padding-top: 5px;\n  padding-left: 10px;\n  padding-right: 10px;\n  padding-bottom: 5px;\n}", ""]);
-
-// exports
-
-
-/***/ }),
-/* 76 */
-/***/ (function(module, exports, __webpack_require__) {
-
 "use strict";
 
 
@@ -21452,6 +21424,51 @@ var MatchThumbnail = function (_React$Component) {
 }(_react2.default.Component);
 
 exports.default = MatchThumbnail;
+
+/***/ }),
+/* 75 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(76);
+if(typeof content === 'string') content = [[module.i, content, '']];
+// Prepare cssTransformation
+var transform;
+
+var options = {"hmr":true}
+options.transform = transform
+// add the styles to the DOM
+var update = __webpack_require__(4)(content, options);
+if(content.locals) module.exports = content.locals;
+// Hot Module Replacement
+if(false) {
+	// When the styles change, update the <style> tags
+	if(!content.locals) {
+		module.hot.accept("!!../node_modules/css-loader/index.js!./style.css", function() {
+			var newContent = require("!!../node_modules/css-loader/index.js!./style.css");
+			if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+			update(newContent);
+		});
+	}
+	// When the module is disposed, remove the <style> tags
+	module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 76 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(3)(undefined);
+// imports
+
+
+// module
+exports.push([module.i, ".app {\n  background-color: #f0f8ff;\n  padding-top: 5px;\n  padding-left: 10px;\n  padding-right: 10px;\n  padding-bottom: 5px;\n}", ""]);
+
+// exports
+
 
 /***/ })
 /******/ ]);

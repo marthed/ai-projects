@@ -21,9 +21,15 @@ async function tinderMatches(req, res) {
   res.send(matches);
 }
 
+async function tinderUpdates(req, res) {
+  const updates = await tinderbot.getUpdates();
+  res.send(updates);
+}
+
 module.exports = {
   homePage,
   crawler,
   tinder,
-  tinderMatches
+  tinderMatches,
+  tinderUpdates
 }
