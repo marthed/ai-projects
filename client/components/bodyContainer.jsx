@@ -43,9 +43,11 @@ export default class BodyContainer extends React.Component {
     
     return (
       <div className="body-container">
+        <div className="body-container__buttons">
+        <Button onChange={this.getData(options)} text="Tabell"/> 
+        </div>
         <div className="body-container__inner">
           <Table teams={teams ? teams : null } />
-          <Button onChange={this.getData(options)} text="Hämta data"/> 
         </div>
       </div>
       )

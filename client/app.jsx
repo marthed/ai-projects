@@ -4,7 +4,7 @@ import Overview from './components/overview.jsx';
 import TinderContainer from './components/tinder/tinderContainer.jsx';
 import styles from './style.css';
 
-const enableTinder = true;
+const enableTinder = false;
 
 class App extends React.Component {
   render () {

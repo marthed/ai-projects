@@ -5,8 +5,10 @@
   margin-right: 50px;
 }
 
+.body-container__buttons {
+}
+
 .body-container__inner {
-  background: #f6f4f4;
   flex-grow: 1;
   display: flex;
   justify-content: center;

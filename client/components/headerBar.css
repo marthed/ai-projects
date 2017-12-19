@@ -1,8 +1,26 @@
 .header-bar {
-  display: flex;
-  justify-content: center;
-  margin-left: 50px;
-  margin-right: 50px;
-  margin-bottom: 5px;
-  background: lightgray;
+  display: block;
+  top: 0;
+  left: 0;
+  right: 0;
+  text-align: center;
+  color: rgb(219, 219, 219);
+  
+}
+
+.header-bar > span > h1 {
+  font-family: 'Tahoma';
+  font-size: 30px;
+  margin: 0;
+  margin-bottom: 2px;
+  padding: 1px;
+  border-top: 3px solid rgb(235, 233, 233);
+  border-bottom: 3px solid rgb(235, 233, 233);
+}
+
+.header-bar > span > h3 {
+  font-style: italic;
+  margin: 0;
+  margin-bottom: 4px;
+  font-size: 11px;
 }

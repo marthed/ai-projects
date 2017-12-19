@@ -2399,7 +2399,7 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var enableTinder = true;
+var enableTinder = false;
 
 var App = function (_React$Component) {
   _inherits(App, _React$Component);
@@ -19984,6 +19984,15 @@ var HeaderBar = function (_React$Component) {
             null,
             'Former Yugos League'
           )
+        ),
+        _react2.default.createElement(
+          'span',
+          null,
+          _react2.default.createElement(
+            'h3',
+            null,
+            '- Since 2014 -'
+          )
         )
       );
     }
@@ -20034,7 +20043,7 @@ exports = module.exports = __webpack_require__(3)(undefined);
 
 
 // module
-exports.push([module.i, ".header-bar {\n  display: flex;\n  justify-content: center;\n  margin-left: 50px;\n  margin-right: 50px;\n  margin-bottom: 5px;\n  background: lightgray;\n}", ""]);
+exports.push([module.i, ".header-bar {\n  display: block;\n  top: 0;\n  left: 0;\n  right: 0;\n  text-align: center;\n  color: rgb(219, 219, 219);\n  \n}\n\n.header-bar > span > h1 {\n  font-family: 'Tahoma';\n  font-size: 30px;\n  margin: 0;\n  margin-bottom: 2px;\n  padding: 1px;\n  border-top: 3px solid rgb(235, 233, 233);\n  border-bottom: 3px solid rgb(235, 233, 233);\n}\n\n.header-bar > span > h3 {\n  font-style: italic;\n  margin: 0;\n  margin-bottom: 4px;\n  font-size: 11px;\n}\n", ""]);
 
 // exports
 
@@ -20138,9 +20147,13 @@ var BodyContainer = function (_React$Component) {
         { className: 'body-container' },
         _react2.default.createElement(
           'div',
+          { className: 'body-container__buttons' },
+          _react2.default.createElement(_button2.default, { onChange: this.getData(options), text: 'Tabell' })
+        ),
+        _react2.default.createElement(
+          'div',
           { className: 'body-container__inner' },
-          _react2.default.createElement(_table2.default, { teams: teams ? teams : null }),
-          _react2.default.createElement(_button2.default, { onChange: this.getData(options), text: 'H\xE4mta data' })
+          _react2.default.createElement(_table2.default, { teams: teams ? teams : null })
         )
       );
     }
@@ -21120,7 +21133,7 @@ exports = module.exports = __webpack_require__(3)(undefined);
 
 
 // module
-exports.push([module.i, ".body-container {\n  display: flex;\n  justify-content: center;\n  margin-left: 50px;\n  margin-right: 50px;\n}\n\n.body-container__inner {\n  background: #f6f4f4;\n  flex-grow: 1;\n  display: flex;\n  justify-content: center;\n  padding: 20px;\n}", ""]);
+exports.push([module.i, ".body-container {\n  display: flex;\n  justify-content: center;\n  margin-left: 50px;\n  margin-right: 50px;\n}\n\n.body-container__buttons {\n}\n\n.body-container__inner {\n  flex-grow: 1;\n  display: flex;\n  justify-content: center;\n  padding: 20px;\n}", ""]);
 
 // exports
 
@@ -21465,7 +21478,7 @@ exports = module.exports = __webpack_require__(3)(undefined);
 
 
 // module
-exports.push([module.i, ".app {\n  background-color: #f0f8ff;\n  padding-top: 5px;\n  padding-left: 10px;\n  padding-right: 10px;\n  padding-bottom: 5px;\n}", ""]);
+exports.push([module.i, ".app {\n  background-color: rgb(255, 255, 255, 0.1);\n  height: 100%;\n  padding-top: 5px;\n  padding-left: 10rem;;\n  padding-right: 10rem;\n  padding-bottom: 5rem;\n  font-family: Helvetica;\n}", ""]);
 
 // exports
 
