@@ -20124,6 +20124,18 @@ var BodyContainer = function (_React$Component) {
           return Promise.reject(error);
         });
       };
+    }, _this.getSeasonStats = function () {
+      console.log('Get season stats!');
+      var options = {
+        method: 'GET',
+        url: '/crawler/seasonStats'
+      };
+
+      return _axios2.default.request(options).then(function (res) {
+        return console.log(res.data) || Promise.resolve(res.data);
+      }).catch(function (err) {
+        return Promise.reject(err);
+      });
     }, _temp), _possibleConstructorReturn(_this, _ret);
   }
 
@@ -20148,7 +20160,8 @@ var BodyContainer = function (_React$Component) {
         _react2.default.createElement(
           'div',
           { className: 'body-container__buttons' },
-          _react2.default.createElement(_button2.default, { onChange: this.getData(options), text: 'Tabell' })
+          _react2.default.createElement(_button2.default, { onChange: this.getData(options), text: 'Tabell' }),
+          _react2.default.createElement(_button2.default, { onChange: this.getSeasonStats, text: 'S\xE4songshistorik' })
         ),
         _react2.default.createElement(
           'div',
@@ -21133,7 +21146,7 @@ exports = module.exports = __webpack_require__(3)(undefined);
 
 
 // module
-exports.push([module.i, ".body-container {\n  display: flex;\n  justify-content: center;\n  margin-left: 50px;\n  margin-right: 50px;\n}\n\n.body-container__buttons {\n}\n\n.body-container__inner {\n  flex-grow: 1;\n  display: flex;\n  justify-content: center;\n  padding: 20px;\n}", ""]);
+exports.push([module.i, ".body-container {\n  display: flex;\n  justify-content: center;\n  flex-flow: column;\n  margin-left: 50px;\n  margin-right: 50px;\n}\n\n.body-container__buttons {\n  display: flex;\n  flex-flow: row;\n  justify-content: space-around;\n}\n\n.body-container__inner {\n  flex-grow: 1;\n  display: flex;\n  justify-content: center;\n  padding: 20px;\n}", ""]);
 
 // exports
 

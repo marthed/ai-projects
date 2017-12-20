@@ -27,7 +27,19 @@ export default class BodyContainer extends React.Component {
       .catch((error) => {
         return Promise.reject(error);
       });
-  } 
+  }
+
+  getSeasonStats = () => {
+    console.log('Get season stats!');
+    const options = {
+      method: 'GET',
+      url: '/crawler/seasonStats',
+    };
+
+    return axios.request(options)
+    .then((res) => console.log(res.data) || Promise.resolve(res.data))
+    .catch((err) => Promise.reject(err));
+  }
 
   render () {
 
@@ -45,6 +57,7 @@ export default class BodyContainer extends React.Component {
       <div className="body-container">
         <div className="body-container__buttons">
         <Button onChange={this.getData(options)} text="Tabell"/> 
+        <Button onChange={this.getSeasonStats} text="Säsongshistorik"/> 
         </div>
         <div className="body-container__inner">
           <Table teams={teams ? teams : null } />

@@ -10,6 +10,12 @@ async function crawler(req, res) {
   res.send(data);
 };
 
+async function getSeasonStats(req, res) {
+  const data = await xpertelevenCrawler.getSeasonStats();
+  res.send(data);
+}
+
+
 async function tinder(req, res) {
   const auth = await tinderbot.authorization(req.body);
   res.send(auth);
@@ -29,6 +35,7 @@ async function tinderUpdates(req, res) {
 module.exports = {
   homePage,
   crawler,
+  getSeasonStats,
   tinder,
   tinderMatches,
   tinderUpdates

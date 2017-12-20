@@ -6,6 +6,7 @@ var tinder = '/tinder';
 
 router.get('/', Controller.homePage);
 router.get('/crawler', Controller.crawler);
+router.get('/crawler/seasonStats', Controller.getSeasonStats);
 
 router.post(`${tinder}`, Controller.tinder);
 router.post(`${tinder}/matches`, Controller.tinderMatches);

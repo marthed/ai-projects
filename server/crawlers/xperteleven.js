@@ -2,7 +2,32 @@ var request = require('request');
 var axios = require('axios');
 var cheerio = require('cheerio');
 var URL = require('url-parse');
+var fs = require('fs');
 
+var { seasonStatsPages } = require('./xpertelevenPages/seasonStatsPages.js');
+
+async function getSeasonStats() {
+
+  return Promise.all(seasonStatsPages.map((page) => {
+    return axios.request({ url: page })
+    .then((res) => {
+      var $ = cheerio.load(res.data);
+      var hej = [];
+      $('div', '#ctl00_cphMain_SeasonStats1_contentBox_pBoxOuterContainer')
+      .each(function(idx, element) {
+        const divList = $(this).text()
+        .split('  ')
+        .filter((string) => {
+          const trimed = string.trim();
+          return trimed !== '';
+        });
+        hej.push(divList);
+      }),
+      console.log('hej: ', hej, '\n \n');
+      Promise.resolve(hej);
+    }).catch((err) => Promise.reject(err));
+  }));
+}
 
 async function getStandings() {
   var pageToVisit = "http://www.xperteleven.com/standings.aspx?Lid=333091&Sel=T&Lnr=1&dh=2";
@@ -57,5 +82,6 @@ async function getStandings() {
   }
 
 module.exports = {
-  getStandings
+  getStandings,
+  getSeasonStats
 }

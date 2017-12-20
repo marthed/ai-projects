@@ -1,11 +1,15 @@
 .body-container {
   display: flex;
   justify-content: center;
+  flex-flow: column;
   margin-left: 50px;
   margin-right: 50px;
 }
 
 .body-container__buttons {
+  display: flex;
+  flex-flow: row;
+  justify-content: space-around;
 }
 
 .body-container__inner {
