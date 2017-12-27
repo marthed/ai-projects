@@ -11,7 +11,7 @@ async function crawler(req, res) {
 };
 
 async function getSeasonStats(req, res) {
-  const data = await xpertelevenCrawler.getSeasonStats();
+  const data =  { seasonStats: await xpertelevenCrawler.getSeasonStats() };
   res.send(data);
 }
 

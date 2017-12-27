@@ -6,42 +6,62 @@ var fs = require('fs');
 
 var { seasonStatsPages } = require('./xpertelevenPages/seasonStatsPages.js');
 
+const standingProperties = [
+  'position',
+  'team',
+  'games',
+  'won',
+  'draw',
+  'lost',
+  'goals',
+  'goalDiff',
+  'points'
+];
+
 async function getSeasonStats() {
 
-  return Promise.all(seasonStatsPages.map((page) => {
+  return Promise.all(seasonStatsPages.map((page, idx) => {
     return axios.request({ url: page })
     .then((res) => {
       var $ = cheerio.load(res.data);
-      var hej = [];
-      $('div', '#ctl00_cphMain_SeasonStats1_contentBox_pBoxOuterContainer')
+      var currentSeasonStats = {};
+
+      $('div', '#ctl00_cphMain_SeasonStats1_contentBox_pFinalStandings')
       .each(function(idx, element) {
         const divList = $(this).text()
         .split('  ')
         .filter((string) => {
           const trimed = string.trim();
-          return trimed !== '';
+          return trimed !== '' && trimed !== null;
         });
-        hej.push(divList);
-      }),
-      console.log('hej: ', hej, '\n \n');
-      Promise.resolve(hej);
+
+        if (divList.length > 1) {
+          const rowObject = divList.reduce((acc, item, idx) => {
+            const property = standingProperties[idx];
+            Object.assign(acc,{ [property]: item });
+            return acc;
+          }, {});
+          Object.assign(currentSeasonStats,  {[rowObject.team]: rowObject});
+        }
+      });
+
+      const seasonName = $('span', '#ctl00_cphMain_SeasonStats1_contentBox_lblFloatTitle');
+      const divList = $('#ctl00_cphMain_SeasonStats1_contentBox_lblFloatTitle').text()
+
+      console.log('seasonName: ', res.data);
+
+      //.split('-')[3];
+
+      const currentSeasonStatsWrapper = Object.assign({}, {[seasonName]: currentSeasonStats});
+
+      //console.log('hej: ', currentSeasonStatsWrapper, '\n \n');
+      return Promise.resolve(currentSeasonStatsWrapper);
     }).catch((err) => Promise.reject(err));
   }));
 }
 
 async function getStandings() {
   var pageToVisit = "http://www.xperteleven.com/standings.aspx?Lid=333091&Sel=T&Lnr=1&dh=2";
-  const standingProperties = [
-    'position',
-    'team',
-    'games',
-    'won',
-    'draw',
-    'lost',
-    'goals',
-    'goalDiff',
-    'points'
-  ];
   
   return axios.request(
     {
