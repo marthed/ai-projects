@@ -20127,33 +20127,66 @@ var BodyContainer = function (_React$Component) {
     }
 
     return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = BodyContainer.__proto__ || Object.getPrototypeOf(BodyContainer)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
-      teams: null
-    }, _this.getData = function (options) {
-      return function () {
-        console.log('get data!');
+      display: 'currentSeason',
+      currentSeason: null,
+      seasonStats: null
+    }, _this.getCurrentSeason = function () {
+      var _this$state = _this.state,
+          currentSeason = _this$state.currentSeason,
+          display = _this$state.display;
+
+
+      if (!currentSeason) {
+        var options = {
+          method: 'GET',
+          url: '/crawler'
+        };
         return _axios2.default.request(options).then(function (res) {
           var result = {};
           res.data.forEach(function (team) {
             var name = team.team;
             Object.assign(result, _defineProperty({}, name, team));
           });
-          _this.setState({ teams: result });
+          _this.setState({ display: 'currentSeason', currentSeason: result });
           return Promise.resolve(res.data);
         }).catch(function (error) {
           return Promise.reject(error);
         });
-      };
+      } else {
+        _this.setState({ display: 'currentSeason' });
+      }
     }, _this.getSeasonStats = function () {
-      console.log('Get season stats!');
-      var options = {
-        method: 'GET',
-        url: '/crawler/seasonStats'
-      };
+      var _this$state2 = _this.state,
+          seasonStats = _this$state2.seasonStats,
+          display = _this$state2.display;
 
-      return _axios2.default.request(options).then(function (res) {
-        return console.log(res.data) || Promise.resolve(res.data);
-      }).catch(function (err) {
-        return Promise.reject(err);
+
+      if (!seasonStats) {
+        console.log('Get season stats!');
+        var options = {
+          method: 'GET',
+          url: '/crawler/seasonStats'
+        };
+        return _axios2.default.request(options).then(function (res) {
+          console.log(res.data);
+          _this.setState({ display: 'seasonStats', seasonStats: res.data.seasonStats });
+          return Promise.resolve(res.data);
+        }).catch(function (err) {
+          return Promise.reject(err);
+        });
+      } else {
+        _this.setState({ display: 'seasonStats' });
+      }
+    }, _this.renderSeasonStats = function (ss) {
+      return ss.map(function (season, idx) {
+        var seasonNumber = Object.keys(season).toString();
+        return _react2.default.createElement(
+          'div',
+          { className: 'seasonStats', key: idx },
+          'S\xE4song ',
+          seasonNumber,
+          _react2.default.createElement(_table2.default, { teams: season[seasonNumber] })
+        );
       });
     }, _temp), _possibleConstructorReturn(_this, _ret);
   }
@@ -20161,31 +20194,27 @@ var BodyContainer = function (_React$Component) {
   _createClass(BodyContainer, [{
     key: 'render',
     value: function render() {
+      var _state = this.state,
+          currentSeason = _state.currentSeason,
+          seasonStats = _state.seasonStats,
+          display = _state.display;
 
-      var options = {
-        method: 'GET',
-        url: '/crawler'
-      };
 
-      console.log(this.state);
-
-      var teams = this.state.teams;
-
-      console.log('teams', teams);
-
+      console.log('display: ', display);
       return _react2.default.createElement(
         'div',
         { className: 'body-container' },
         _react2.default.createElement(
           'div',
           { className: 'body-container__buttons' },
-          _react2.default.createElement(_button2.default, { onChange: this.getData(options), text: 'Tabell' }),
+          _react2.default.createElement(_button2.default, { onChange: this.getCurrentSeason, text: 'Tabell' }),
           _react2.default.createElement(_button2.default, { onChange: this.getSeasonStats, text: 'S\xE4songshistorik' })
         ),
         _react2.default.createElement(
           'div',
           { className: 'body-container__inner' },
-          _react2.default.createElement(_table2.default, { teams: teams ? teams : null })
+          display === 'currentSeason' && _react2.default.createElement(_table2.default, { teams: currentSeason ? currentSeason : null }),
+          display === 'seasonStats' && this.renderSeasonStats(seasonStats)
         )
       );
     }
@@ -21165,7 +21194,7 @@ exports = module.exports = __webpack_require__(3)(undefined);
 
 
 // module
-exports.push([module.i, ".body-container {\n  display: flex;\n  justify-content: center;\n  flex-flow: column;\n  margin-left: 50px;\n  margin-right: 50px;\n}\n\n.body-container__buttons {\n  display: flex;\n  flex-flow: row;\n  justify-content: space-around;\n}\n\n.body-container__inner {\n  flex-grow: 1;\n  display: flex;\n  justify-content: center;\n  padding: 20px;\n}", ""]);
+exports.push([module.i, ".body-container {\n  display: flex;\n  justify-content: center;\n  flex-flow: column;\n  margin-left: 50px;\n  margin-right: 50px;\n}\n\n.body-container__buttons {\n  display: flex;\n  flex-flow: row;\n  justify-content: space-around;\n}\n\n.body-container__inner {\n  flex-grow: 1;\n  display: flex;\n  justify-content: center;\n  flex-flow: column;\n  padding: 20px;\n}\n\n.seasonStats {\n\n}", ""]);
 
 // exports
 

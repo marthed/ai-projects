@@ -9,58 +9,83 @@ import './bodyContainer.css';
 export default class BodyContainer extends React.Component {
 
   state = {
-    teams: null
+    display: 'currentSeason',
+    currentSeason: null,
+    seasonStats: null
   }
 
-  getData = (options) => () => {
-    console.log('get data!');
-    return axios.request(options)
-      .then((res) => {
-        const result = {};
-        res.data.forEach((team) => {
-          const name = team.team;
-          Object.assign(result, { [name]: team });
+  getCurrentSeason = () => {
+    const { currentSeason, display } = this.state;
+
+    if (!currentSeason) {
+      const options = {
+        method: 'GET',
+        url: '/crawler',
+      };
+      return axios.request(options)
+        .then((res) => {
+          const result = {};
+          res.data.forEach((team) => {
+            const name = team.team;
+            Object.assign(result, { [name]: team });
+          });
+          this.setState({ display: 'currentSeason', currentSeason: result });
+          return Promise.resolve(res.data);
+        })
+        .catch((error) => {
+          return Promise.reject(error);
         });
-        this.setState({ teams: result });
-        return Promise.resolve(res.data);
-      })
-      .catch((error) => {
-        return Promise.reject(error);
-      });
+    }
+    else {
+      this.setState({display: 'currentSeason' });
+    }
   }
 
   getSeasonStats = () => {
-    console.log('Get season stats!');
-    const options = {
-      method: 'GET',
-      url: '/crawler/seasonStats',
-    };
+    const { seasonStats, display } = this.state;
 
-    return axios.request(options)
-    .then((res) => console.log(res.data) || Promise.resolve(res.data))
-    .catch((err) => Promise.reject(err));
+    if (!seasonStats) {
+      console.log('Get season stats!');
+      const options = {
+        method: 'GET',
+        url: '/crawler/seasonStats',
+      };
+      return axios.request(options)
+        .then((res) => {
+          console.log(res.data);
+          this.setState({display: 'seasonStats', seasonStats: res.data.seasonStats});
+          return Promise.resolve(res.data);
+        })
+        .catch((err) => Promise.reject(err));
+    }
+    else {
+      this.setState({display: 'seasonStats'});
+    }
+  }
+
+  renderSeasonStats = (ss) => {
+    return ss.map((season, idx) => {
+      const seasonNumber = Object.keys(season).toString();
+      return (<div className="seasonStats" key={idx}>
+        Säsong {seasonNumber}
+        <Table teams={season[seasonNumber]} />
+      </div>)
+    })
   }
 
   render () {
+    const { currentSeason, seasonStats, display } = this.state;
 
-    const options = {
-      method: 'GET',
-      url: '/crawler',
-    };
-
-    console.log(this.state);
-
-    const { teams } = this.state;
-    console.log('teams', teams);
-    
+    console.log('display: ', display);
     return (
       <div className="body-container">
         <div className="body-container__buttons">
-        <Button onChange={this.getData(options)} text="Tabell"/> 
+        <Button onChange={this.getCurrentSeason} text="Tabell"/> 
         <Button onChange={this.getSeasonStats} text="Säsongshistorik"/> 
         </div>
         <div className="body-container__inner">
-          <Table teams={teams ? teams : null } />
+          {(display === 'currentSeason') && <Table teams={currentSeason ? currentSeason : null } />}
+          {(display === 'seasonStats') && this.renderSeasonStats(seasonStats)}
         </div>
       </div>
       )

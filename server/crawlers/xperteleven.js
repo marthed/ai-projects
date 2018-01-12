@@ -35,7 +35,7 @@ async function getSeasonStats() {
           return trimed !== '' && trimed !== null;
         });
 
-        if (divList.length > 1) {
+        if (divList.length > 1 && !divList[0].includes('Plac')) {
           const rowObject = divList.reduce((acc, item, idx) => {
             const property = standingProperties[idx];
             Object.assign(acc,{ [property]: item });
@@ -45,14 +45,17 @@ async function getSeasonStats() {
         }
       });
 
-      const seasonName = $('span', '#ctl00_cphMain_SeasonStats1_contentBox_lblFloatTitle');
-      const divList = $('#ctl00_cphMain_SeasonStats1_contentBox_lblFloatTitle').text()
+      const seasonNumber = 
+        $('#ctl00_cphMain_SeasonStats1_DynamicBox1_ddlSeason')
+        .children()
+        .filter(function(idx, element) {
+          return element.attribs.selected;
+        })
+        .map(function(idx, element) {
+          return $(this).attr('value');
+        })[0];
 
-      console.log('seasonName: ', res.data);
-
-      //.split('-')[3];
-
-      const currentSeasonStatsWrapper = Object.assign({}, {[seasonName]: currentSeasonStats});
+      const currentSeasonStatsWrapper =  {[seasonNumber]: currentSeasonStats};
 
       //console.log('hej: ', currentSeasonStatsWrapper, '\n \n');
       return Promise.resolve(currentSeasonStatsWrapper);
