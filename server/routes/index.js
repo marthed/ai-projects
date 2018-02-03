@@ -12,5 +12,4 @@ router.post(`${tinder}`, Controller.tinder);
 router.post(`${tinder}/matches`, Controller.tinderMatches);
 router.get(`${tinder}/updates`, Controller.tinderUpdates);
 
-
 module.exports = router;
