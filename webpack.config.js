@@ -1,12 +1,13 @@
 const webpack = require('webpack');
 var path = require('path');
+var babelloader = require('babel-loader');
 
 let loaders = [];
 
 loaders.push({
   test: /\.jsx?$/,
   exclude: /node_modules/,
-  use: 'babel-loader',
+  use: babelloader,
 });
 
 loaders.push({

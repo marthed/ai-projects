@@ -9,7 +9,7 @@
     "client": "webpack --config webpack.dev.js --watch",
     "heroku-postbuild": "webpack -p --config webpack.prod.js --progress",
     "crawler": "nodemon crawler.js",
-    "build": "webpack --config webpack.prod.js",
+    "build": "webpack -p --config webpack.prod.js",
     "test": "test"
   },
   "repository": {
