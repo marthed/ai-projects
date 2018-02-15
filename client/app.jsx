@@ -7,22 +7,10 @@ import Button from './components/button.jsx';
 
 class App extends React.Component {
 
-  state = {
-    enableTinder: false
-  }
-
-  toggleMode = () => {
-    const { enableTinder } = this.state; 
-    this.setState({enableTinder: !enableTinder})
-  }
-
   render () {
-    const { enableTinder } = this.state;
     return (
       <div className="app">
-        {!enableTinder && <Overview />}
-        {enableTinder && <TinderContainer /> }
-        <Button onChange={this.toggleMode}/>
+        <Overview />
       </div>
       )
   }
