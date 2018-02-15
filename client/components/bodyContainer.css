@@ -2,24 +2,36 @@
   display: flex;
   justify-content: center;
   flex-flow: column;
-  margin-left: 50px;
-  margin-right: 50px;
 }
 
 .body-container__buttons {
   display: flex;
   flex-flow: row;
-  justify-content: space-around;
 }
 
 .body-container__inner {
-  flex-grow: 1;
-  display: flex;
-  justify-content: center;
-  flex-flow: column;
-  padding: 20px;
+  margin-top: 20px;
 }
 
 .seasonStats {
+  margin-top: 5px;
+  margin-bottom: 30px;
+}
 
+.seasonStats span {
+  padding-left: 2px;
+  font-size: 24px;
+  color: rgb(233, 229, 229);
+}
+
+table {
+  width: 100%;
+  border-style: solid;
+}
+
+th,td {
+  border-style: solid;
+  border-radius: 0.5;
+  border-color: rgb(15, 13, 13);
+  word-wrap: break-word;
 }

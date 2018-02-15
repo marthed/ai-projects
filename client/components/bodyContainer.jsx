@@ -67,7 +67,7 @@ export default class BodyContainer extends React.Component {
     return ss.map((season, idx) => {
       const seasonNumber = Object.keys(season).toString();
       return (<div className="seasonStats" key={idx}>
-        Säsong {seasonNumber}
+        <span> Säsong {seasonNumber}</span>
         <Table teams={season[seasonNumber]} />
       </div>)
     })

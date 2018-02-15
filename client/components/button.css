@@ -1,8 +1,9 @@
 .button {
   background-color: rgb(243, 236, 234);
-  color: rgb(31, 29, 29);
+  color: rgb(78, 76, 76);
   border: none;
-  padding: 12px 30px;
+  height: 30px;
+  margin-right: 3px;
   text-align: center;
   display: inline-block;
   font-size: 16px;
