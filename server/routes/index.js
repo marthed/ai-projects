@@ -11,7 +11,8 @@ router.get('/crawler/seasonStats', Controller.getSeasonStats);
 
 router.get('/teams', databaseController.getTeams);
 router.get('/teams:id', databaseController.getTeam);
-router.post('/teams', databaseController.updateTeam);
+router.put('/teams:id', databaseController.updateTeam);
+router.post('/teams', databaseController.createTeam);
 
 router.post(`${tinder}`, Controller.tinder);
 router.post(`${tinder}/matches`, Controller.tinderMatches);
