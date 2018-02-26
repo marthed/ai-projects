@@ -1,18 +1,4 @@
-var mongodb = require('mongodb');
-var ObjectID = mongodb.ObjectID;
-var mongodbURI = process.env.MONGODB_URI || "mongodb://heroku_72x5v2jk:u48gbqut77lcljdggv9eglvi01@ds149479.mlab.com:49479/heroku_72x5v2jk";
-
-var db;
-
-mongodb.MongoClient.connect(mongodbURI, function (err, database) {
-  if (err) {
-    console.log(err);
-    process.exit(1);
-  }
-  db = database;
-  console.log("Database connection ready");
-})
-
+var getCollection = require('../database').getCollection;
 
 function handleError(res, reason, message, code) {
   console.log("ERROR: " + reason);
@@ -20,30 +6,45 @@ function handleError(res, reason, message, code) {
 }
 
 async function getTeams(req, res) {
-  db.collection('TEAMS_COLLECTION').find({}).toArray(function(err, docs) {
-    if (err) handleError(res, err, "Failed to get teams");
-    res.status(200).json(docs);
-  });
+  try {
+    const teamCollection = await getCollection('TEAMS_COLLECTION');
+    teamCollection.find({}).toArray(function(err, docs) {
+      if (err) handleError(res, err, "Couldn't find any teams");
+      res.status(200).json(docs);
+    });
+  }
+  catch (e) {
+    return handleError(res, e, "Failed to get collection");
+  }
 };
 
 async function getTeam(req, res) {
-  return res.statusCode(200);
+  try {
+    const { name } = req.body;
+    const teamCollection = await getCollection('TEAMS_COLLECTION');
+    teamCollection.find({name}).toArray(function(err, docs) {
+    if (err) handleError(res, err, "Couldn't find this team");
+    res.status(200).json(docs);
+    });
+  }
+  catch (e) {
+    return handleError(res, e, "Failed to get collection");
+  }
 };
 
 async function createTeam(req, res) {
   const newTeam = req.body;
-
-  if (!req.body.id) {
+  if (!req.body.name) {
     handleError(res, "Invalid user input", "Must provide an ID", 400);
   }
-  db.collection('TEAMS_COLLECTION').insertOne(newTeam, function(err, doc){
+  getCollection('TEAMS_COLLECTION').insertOne(newTeam, function(err, doc){
     if(err) return handleError(res, err.message, "Failed to create team");
     res.status(201).json(doc.ops[0]);
   });
 
 };
 
-async function updateTeam(req, res) {
+function updateTeam(req, res) {
   return res.statusCode(200);
 };
 

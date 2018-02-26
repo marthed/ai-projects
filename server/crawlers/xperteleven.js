@@ -56,12 +56,55 @@ async function getSeasonStats() {
         })[0];
 
       const currentSeasonStatsWrapper =  {[seasonNumber]: currentSeasonStats};
-
-      //console.log('hej: ', currentSeasonStatsWrapper, '\n \n');
       return Promise.resolve(currentSeasonStatsWrapper);
     }).catch((err) => Promise.reject(err));
   }));
 }
+
+
+
+async function crawlSeasonStats() {
+  return Promise.all(seasonStatsPages.map((page, idx) => {
+    return axios.request({ url: page })
+    .then((res) => {
+      var $ = cheerio.load(res.data);
+      var currentSeasonStats = [];
+
+      $('div', '#ctl00_cphMain_SeasonStats1_contentBox_pFinalStandings')
+      .each(function(idx, element) {
+        const divList = $(this).text()
+        .split('  ')
+        .filter((string) => {
+          const trimed = string.trim();
+          return trimed !== '' && trimed !== null;
+        });
+
+        if (divList.length > 1 && !divList[0].includes('Plac')) {
+          const rowObject = divList.reduce((acc, item, idx) => {
+            const property = standingProperties[idx];
+            Object.assign(acc,{ [property]: item });
+            return acc;
+          }, {});
+          currentSeasonStats.push(rowObject);
+        };
+      });
+
+      const seasonNumber = 
+        $('#ctl00_cphMain_SeasonStats1_DynamicBox1_ddlSeason')
+        .children()
+        .filter(function(idx, element) {
+          return element.attribs.selected;
+        })
+        .map(function(idx, element) {
+          return $(this).attr('value');
+        })[0];
+
+      const currentSeasonStatsWrapper =  {seasonNumber, currentSeasonStats};
+      return Promise.resolve(currentSeasonStatsWrapper);
+    }).catch((err) => Promise.reject(err));
+  }));
+}
+
 
 async function getStandings() {
   var pageToVisit = "http://www.xperteleven.com/standings.aspx?Lid=333091&Sel=T&Lnr=1&dh=2";
@@ -106,5 +149,6 @@ async function getStandings() {
 
 module.exports = {
   getStandings,
-  getSeasonStats
+  getSeasonStats,
+  crawlSeasonStats
 }
