@@ -62,9 +62,8 @@ async function getSeasonStats() {
 }
 
 
-
-async function crawlSeasonStats() {
-  return Promise.all(seasonStatsPages.map((page, idx) => {
+async function crawlSeasonStats(req, res) {
+  const data = { seasonStats: await Promise.all(seasonStatsPages.map((page, idx) => {
     return axios.request({ url: page })
     .then((res) => {
       var $ = cheerio.load(res.data);
@@ -102,7 +101,8 @@ async function crawlSeasonStats() {
       const currentSeasonStatsWrapper =  {seasonNumber, currentSeasonStats};
       return Promise.resolve(currentSeasonStatsWrapper);
     }).catch((err) => Promise.reject(err));
-  }));
+  }))};
+  res.send(data);
 }
 
 
@@ -115,6 +115,7 @@ async function getStandings() {
       method: 'get'
     })
     .then((res) => {
+      console.log(res.data);
       var $ = cheerio.load(res.data);
       var standings = [];
       var rows = [];

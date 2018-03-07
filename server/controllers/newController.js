@@ -22,15 +22,7 @@ function populateDatabase(seasonStats) {
 async function getSeasonStats(req, res){
   try {
     const teamCollection = await getCollection('TEAMS_COLLECTION');
-    const teams = await teamCollection.find().toArray();
-    const statsLoaded = teams.find((team) => team.seasonStats);
-    if (statsLoaded){
-      return res.status(200).json(teams);
-    }
-    const crawledSeasonStats = await crawlSeasonStats();
 
-
-    return res.status(200).json(crawledSeasonStats);
 
   } catch (e) {
     handleError(res, e, 'Failed to get season stats');
