@@ -48,6 +48,7 @@ function updateTeam(req, res) {
   return res.statusCode(200);
 };
 
+
 module.exports = {
   getTeams,
   getTeam,
