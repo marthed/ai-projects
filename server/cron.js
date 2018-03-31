@@ -8,16 +8,16 @@ cron.schedule('1,30 * * * * * *', async function() {
   try {
 
     const seasonStats = await crawlStandings();
-    console.log('seasonStats: ', seasonStats);
+    //console.log('seasonStats: ', seasonStats);
     const date = Date.now();
-    console.log('date: ', date);
-    const currentStandings = await getCollection('currentStandings')
-    currentStandings
-      .insert({
-        seasonNumber: 18,
-        date,
-        standings: seasonStats
-      });
+    console.log('date: ', moment().format('YYYY-MM-DD HH:MM'));
+    // const currentStandings = await getCollection('currentStandings')
+    // currentStandings
+    //   .insert({
+    //     seasonNumber: 18,
+    //     date: moment().format('YYYY-MM-DD HH:MM'),
+    //     standings: seasonStats
+    //   });
   } catch (error) {
     console.log('ERROR: ', error);
   }
