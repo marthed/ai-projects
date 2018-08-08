@@ -4,16 +4,12 @@ var Controller = require('../controllers/controllers.js');
 var databaseController = require('../controllers/databaseController');
 var newController = require('../controllers/newController');
 
-const { crawlHalsoLiv } = require('../crawlers/womensHealth');
-
 var path = require('path');
 var tinder = '/tinder';
 
 router.get('/', Controller.homePage);
 router.get('/crawler', Controller.crawler);
 router.get('/crawler/seasonStats', Controller.getSeasonStats);
-
-router.get('/halsoLiv', crawlHalsoLiv);
 
 router.get('/teams', databaseController.getTeams);
 router.get('/teams:name', databaseController.getTeam);

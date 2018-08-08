@@ -45,14 +45,12 @@ export default class BodyContainer extends React.Component {
     const { seasonStats, display } = this.state;
 
     if (!seasonStats) {
-      console.log('Get season stats!');
       const options = {
         method: 'GET',
         url: '/crawler/seasonStats',
       };
       return axios.request(options)
         .then((res) => {
-          console.log(res.data);
           this.setState({display: 'seasonStats', seasonStats: res.data.seasonStats});
           return Promise.resolve(res.data);
         })
@@ -75,8 +73,6 @@ export default class BodyContainer extends React.Component {
 
   render () {
     const { currentSeason, seasonStats, display } = this.state;
-
-    console.log('display: ', display);
     return (
       <div className="body-container">
         <div className="body-container__buttons">
