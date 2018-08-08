@@ -15,7 +15,9 @@ var seasonStatsPages = [
   "http://www.xperteleven.com/seasonstats.aspx?lid=333091&lnr=1&s=14",
   "http://www.xperteleven.com/seasonstats.aspx?lid=333091&lnr=1&s=15",
   "http://www.xperteleven.com/seasonstats.aspx?lid=333091&lnr=1&s=16",
-  "http://www.xperteleven.com/seasonstats.aspx?lid=333091&lnr=1&s=17"
+  "http://www.xperteleven.com/seasonstats.aspx?lid=333091&lnr=1&s=17",
+  "http://www.xperteleven.com/seasonstats.aspx?lid=333091&lnr=1&s=18",
+  "http://www.xperteleven.com/seasonstats.aspx?lid=333091&lnr=1&s=19"
 ];
 
 
