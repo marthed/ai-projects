@@ -56,12 +56,42 @@ async function getSeasonStats() {
         })[0];
 
       const currentSeasonStatsWrapper =  {[seasonNumber]: currentSeasonStats};
-
-      //console.log('hej: ', currentSeasonStatsWrapper, '\n \n');
       return Promise.resolve(currentSeasonStatsWrapper);
     }).catch((err) => Promise.reject(err));
   }));
 }
+
+async function crawlStandings() {
+  var pageToVisit = "http://www.xperteleven.com/standings.aspx?Lid=333091&Sel=T&Lnr=1&dh=2";
+  try {
+    const { data } = await axios.request({ url: pageToVisit, method: 'get'});
+    const $ = cheerio.load(data);
+    const rows = [];
+    $('tr', '#ctl00_cphMain_dgStandings')
+    .each(function(idx) {
+      const rowList = $(this).text().split('  ').filter((string) => {
+          const trimed = string.trim();
+          return trimed !== '';
+        });
+      rows.push(rowList);
+    });
+
+    const standingsArray = rows
+      .filter((row, idx) => idx % 2 !== 0)
+      .map((row) => {
+      const rowObject = row.reduce((acc, item, idx) => {
+        const property = standingProperties[idx];
+        Object.assign(acc,{ [property]: item });
+        return acc;
+      }, {});
+      return rowObject;
+    });
+    return standingsArray;
+  } catch (error) {
+    return error;
+  }
+}
+
 
 async function getStandings() {
   var pageToVisit = "http://www.xperteleven.com/standings.aspx?Lid=333091&Sel=T&Lnr=1&dh=2";
@@ -83,7 +113,6 @@ async function getStandings() {
             return trimed !== '';
           });
         rows.push(rowList);
-        // var text = $(this).text().replace(/\s/g,'');
       });
 
       var processedObject = rows.filter((row, idx) => {
@@ -96,6 +125,9 @@ async function getStandings() {
         }, {});
         return rowObject;
       });
+      
+      console.log('processedObject: ', processedObject);
+      
 
       return Promise.resolve(processedObject);
     })
@@ -106,5 +138,6 @@ async function getStandings() {
 
 module.exports = {
   getStandings,
-  getSeasonStats
+  getSeasonStats,
+  crawlStandings
 }

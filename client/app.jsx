@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Overview from './components/overview.jsx';
-import TinderContainer from './components/tinder/tinderContainer.jsx';
 import styles from './style.css';
 import Button from './components/button.jsx';
 
